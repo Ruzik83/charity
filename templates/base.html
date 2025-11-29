@@ -1,0 +1,558 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Благотворительный проект</title>
+    
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'favicon.ico/favicon2.png' %}">
+</head>
+<body>
+  <style>/* ========== Umumiy sozlamalar va reset ========== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html, body {
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden; /* Gorizontal scrollni oldini olish */
+    }
+    
+    body {
+        font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f7f9fc;
+        color: #2c3e50;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Sahifa to‘liq ekran balandligini egallashi */
+    }
+    
+    /* Asosiy kontent qolgan joyni egallaydi */
+    main {
+        flex: 1;
+        width: 100%;
+    }
+    
+    /* ========== Header / Navigatsiya ========== */
+    header {
+        background: linear-gradient(135deg, #2c3e50, #34495e);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        padding: 12px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        width: 100%;
+    }
+    
+    .navbar {
+        max-width: 1400px; /* Katta ekranlar uchun kenglik */
+        margin: 0 auto;
+        padding: 0 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .logo a {
+        color: #ecf0f1;
+        text-decoration: none;
+        font-size: clamp(24px, 5vw, 28px); /* Moslashuvchan shrift */
+        font-weight: 700;
+        transition: color 0.3s ease;
+    }
+    
+    .logo a:hover {
+        color: #1abc9c;
+    }
+    
+    .nav-links {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        gap: clamp(15px, 3vw, 25px);
+    }
+    
+    .nav-links li a {
+        color: #ecf0f1;
+        text-decoration: none;
+        font-size: clamp(16px, 2.5vw, 18px);
+        padding: 6px 10px;
+        transition: all 0.3s ease;
+        border-radius: 4px;
+    }
+    
+    .nav-links li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #1abc9c;
+    }
+    
+    .navbar-toggler {
+        display: none;
+        background-color: transparent;
+        border: none;
+        color: #ecf0f1;
+        font-size: 28px;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+    
+    .nav-links .close-btn {
+        display: none;
+        text-align: right;
+        padding: 10px;
+    }
+    
+    .nav-links .close-btn button {
+        background: none;
+        border: none;
+        color: #ecf0f1;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .overlay.active {
+        display: block;
+    }
+    
+    /* Mobil navigatsiya */
+    @media (max-width: 768px) {
+        .navbar-toggler {
+            display: block;
+        }
+    
+        .nav-links {
+            display: none !important;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 80%;
+            max-width: 300px;
+            height: 100%;
+            background-color: #333;
+            padding: 20px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+    
+        .nav-links.active {
+            display: flex !important;
+            transform: translateX(0);
+        }
+    
+        .nav-links .close-btn {
+            display: block;
+        }
+    
+        .nav-links li a {
+            font-size: 20px;
+            padding: 12px 20px;
+            width: 100%;
+            text-align: left;
+        }
+    
+        .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #1abc9c;
+        }
+    
+        .navbar {
+            padding: 0 10px;
+        }
+    }
+    
+    /* ========== So‘rovlar bo‘limi ========== */
+    #requests-section {
+        padding: clamp(30px, 5vw, 50px) 5%;
+        background-color: #f7f9fc;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    #requests-section h2 {
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: clamp(20px, 4vw, 40px);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: bold;
+    }
+    
+    .requests-grid {
+        display: flex;
+        flex-direction: column; /* Kartalar vertikal joylashadi */
+        gap: clamp(20px, 3vw, 30px);
+        max-width: 800px; /* Noutbukda o‘rtada joylashishi uchun cheklangan kenglik */
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    /* Katta ekranlar uchun sozlamalar */
+    @media (min-width: 769px) {
+        .requests-grid {
+            max-width: 1000px; /* Noutbukda kengroq, lekin o‘rtada */
+            padding: 0 20px;
+        }
+    }
+    
+    .request-card {
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #ffffff;
+        border: 1px solid #dee2e6;
+        padding: clamp(15px, 3vw, 25px);
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .request-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    .request-card h3 {
+        font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+        color: #1a202c;
+        margin-bottom: 10px;
+    }
+    
+    .request-card p {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        color: #4a5568;
+        line-height: 1.6;
+        margin-bottom: 8px;
+    }
+    
+    .request-card img,
+    .request-card video,
+    .request-card iframe {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-top: 15px;
+    }
+    
+    /* Kartadagi ixtiyoriy tugma */
+    .request-card .btn {
+        display: inline-block;
+        margin-top: 15px;
+        background-color: #1abc9c;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+    
+    .request-card .btn:hover {
+        background-color: #16a085;
+    }
+    
+    /* Mobil uchun sozlamalar */
+    @media (max-width: 768px) {
+        #requests-section {
+            padding: 30px 3%;
+        }
+    
+        .requests-grid {
+            gap: 20px;
+            max-width: 100%; /* Telefonlarda to‘liq kenglik */
+            padding: 0 10px;
+        }
+    
+        .request-card {
+            padding: 15px;
+        }
+    
+        .request-card h3 {
+            font-size: 1.3rem;
+        }
+    
+        .request-card p {
+            font-size: 0.95rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        #requests-section {
+            padding: 20px 2%;
+        }
+    
+        .request-card {
+            padding: 10px;
+        }
+    
+        .request-card h3 {
+            font-size: 1.1rem;
+        }
+    
+        .request-card p {
+            font-size: 0.85rem;
+        }
+    }
+    
+    /* ========== Footer bo‘limi ========== */
+    footer {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        text-align: center;
+        padding: clamp(15px, 3vw, 20px) 0;
+        font-size: clamp(12px, 2vw, 14px);
+        width: 100%;
+        margin-top: auto;
+    }
+    
+    .footer {
+        background-color: #1F2937;
+        color: #ffffff;
+        padding: clamp(20px, 5vw, 40px) 5%;
+        width: 100%;
+    }
+    
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 0 15px;
+    }
+    
+    .footer-row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: clamp(20px, 3vw, 30px);
+    }
+    
+    .footer-box {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .footer-box h3 {
+        font-size: clamp(16px, 2.5vw, 18px);
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #ffffff;
+    }
+    
+    .footer-box p,
+    .footer-box li,
+    .footer-box a {
+        font-size: clamp(12px, 2vw, 14px);
+        color: #cbd5e1;
+        text-decoration: none;
+        line-height: 1.6;
+    }
+    
+    .footer-box a:hover {
+        color: #ffffff;
+    }
+    
+    .footer-box ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        font-size: clamp(11px, 2vw, 13px);
+        color: #9ca3af;
+        margin-top: 20px;
+        border-top: 1px solid #374151;
+        padding-top: 15px;
+    }
+    
+    /* Footer uchun moslashuvchanlik */
+    @media (max-width: 768px) {
+        .footer {
+            padding: 30px 3%;
+        }
+    
+        .footer-row {
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+    
+        .footer-box {
+            min-width: 100%;
+            text-align: center;
+        }
+    }
+    
+    /* ========== Umumiy moslashuvchan sozlamalar ========== */
+    @media (max-width: 1024px) {
+        .navbar {
+            padding: 0 10px;
+        }
+    }
+    
+    @media (min-width: 1400px) {
+        .navbar,
+        .container {
+            max-width: 1600px; /* Katta ekranlar uchun */
+        }
+    }
+    
+    /* Rasmlar va media uchun moslashuvchanlik */
+    img,
+    video,
+    iframe {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* Kenglik muammolarini tuzatish */
+    .container,
+    .navbar,
+    .requests-grid {
+        box-sizing: border-box;
+        width: 100%;
+    }
+    
+    /* Kirish imkoniyatlarini yaxshilash */
+    :focus {
+        outline: 2px solid #1abc9c;
+        outline-offset: 2px;
+    }
+    
+    button,
+    a {
+        cursor: pointer;
+    }
+
+    
+    </style>
+
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'home' %}">Charity</a>
+            </div>
+            <button type="button" class="navbar-toggler" onclick="toggleNav()">☰</button>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'help' %}">Помощь</a></li>
+                <li><a href="{% url 'home' %}#services" class="hover:text-white">Сервис</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" >
+            <div class="hero-content">
+                <h2>Помогите нуждающимся вместе с нами</h2>
+                <div class="hero-buttons">
+                    <a href="{% url 'help' %} "   class="btn">Помощь</a>
+                    <a href="{% url 'home' %}#services" class="btn">Сервис</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Services Section (Moved up) -->
+        <section id="services">
+            <h2>Наши услуги</h2>
+            
+            <div class="service">
+              <h3>🍞 Продуктовая помощь</h3>
+              <p>Мы доставляем продукты питания для малообеспеченных семей.</p>
+            </div>
+            <div class="service">
+              <h3>💊 Лекарственная помощь</h3>
+              <p>Закупаем необходимые лекарства для нуждающихся пациентов.</p>
+            </div>
+            <div class="service">
+              <h3>👕 Одежда и обувь</h3>
+              <p>Раздаём тёплую одежду нуждающимся в холодное время года.</p>
+            </div>
+            <div class="service">
+              <h3>🏠 Жилищная помощь</h3>
+              <p>Предоставляем временное жильё для бездомных и нуждающихся.</p>
+            </div>
+            <div class="service">
+              <h3>🚑 Медицинская помощь</h3>
+              <p>Обеспечиваем медицинскими услугами людей с ограниченными возможностями.</p>
+            </div>
+            <div class="service">
+              <h3>🎒 Образовательная помощь</h3>
+              <p>Организуем образовательные курсы для детей и взрослых.</p>
+            </div>
+        </section>
+
+        <!-- Help Section -->
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-row">
+    
+        <!-- About -->
+        <div class="footer-box">
+          <h3>O нас</h3>
+          <p>
+            Мы верим в помощь обществу. Мы делимся любовью и надеждой через еду, одежду и образовательные возможности.
+          </p>
+        </div>
+    
+        <!-- Links -->
+        <div class="footer-box">
+          <h3>Полезные ссылки</h3>
+          <ul>
+            <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="{% url 'home' %}#services" class="hover:text-white">Сервис</a></li>
+            <li><a href="{% url 'help' %}">Помощь</a></li>
+          </ul>
+        </div>
+    
+        <!-- Contact -->
+        <div class="footer-box">
+          <h3>Контакт</h3>
+          <ul>
+            <li>Электронная почта: <a href="mailto:info@charity.org">info@charity.org</a></li>
+            <li>Телефон: +998 90 123 45 67</li>
+            <li>Адрес: Toshkent shahri, O‘zbekiston</li>
+          </ul>
+        </div>
+    
+      </div>
+    
+      <div class="footer-bottom">
+        © 2025 Благотворительный проект. Все права защищены.
+      </div>
+    </footer>
+    
+
+    <!-- JS script -->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

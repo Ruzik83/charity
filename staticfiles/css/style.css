@@ -1,0 +1,373 @@
+/* ========== Base Reset & Global ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; /* Barcha sahifa uchun balandlikni 100% qilish */
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc;
+    color: #2c3e50;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========== Hero Section ========== */
+.hero {
+    position: relative;
+    background-image: url('/static/images/help-family.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.hero-content {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+}
+
+.hero-buttons .btn {
+    background-color: #1abc9c;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.hero-buttons .btn:hover {
+    background-color: #16a085;
+}
+
+/* ========== Main Content ========== */
+main {
+    flex-grow: 1; /* Contentni markazlashtirish va pastga surish */
+}
+
+/* ========== Header / Navbar ========== */
+header {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.logo a:hover {
+    color: #1abc9c;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 6px 10px;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #1abc9c;
+}
+
+/* ========== Mobile Navbar ========== */
+.navbar-toggler {
+    display: none;
+    background-color: transparent;
+    border: none;
+    color: #ecf0f1;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.nav-links .close-btn {
+    display: none; /* Desktopda yopish tugmasi ko'rinmaydi */
+    text-align: right;
+    padding: 10px;
+}
+
+.nav-links .close-btn button {
+    background: none;
+    border: none;
+    color: #ecf0f1;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.overlay.active {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+
+    .nav-links {
+        display: none !important; /* Majburiy yashirish */
+        flex-direction: column;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 250px;
+        height: 100%;
+        background-color: #333;
+        padding: 20px;
+        transform: translateX(-100%); /* Sidebar yashirin holatda */
+        transition: transform 0.3s ease; /* Silliq animatsiya */
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        display: flex !important; /* Majburiy ko‘rsatish */
+        transform: translateX(0); /* Sidebar ochilgan holatda */
+    }
+
+    .nav-links .close-btn {
+        display: block; /* Mobil versiyada yopish tugmasi ko‘rinadi */
+    }
+
+    .nav-links li a {
+        font-size: 20px;
+        padding: 12px 20px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .nav-links li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #1abc9c;
+    }
+}
+
+/* ========== Footer ========== */
+footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+.footer {
+    background-color: #1F2937;
+    color: #ffffff;
+    padding: 40px 20px;
+    font-family: sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-box {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-box h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.footer-box p,
+.footer-box li,
+.footer-box a {
+    font-size: 14px;
+    color: #cbd5e1;
+    text-decoration: none;
+    line-height: 1.6;
+}
+
+.footer-box a:hover {
+    color: #ffffff;
+}
+
+.footer-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 13px;
+    color: #9ca3af;
+    margin-top: 40px;
+    border-top: 1px solid #374151;
+    padding-top: 15px;
+}
+
+/* Responsive adjustments for Hero Section */
+@media (max-width: 768px) {
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* ========== Services Section ========== */
+#services {
+    background: #f4f6f9;
+    padding: 50px 10%;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+/* Section title */
+#services h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+/* Grid container for service blocks */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Service blocks */
+.service {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    text-align: center;
+    border: 2px solid #dee2e6;
+}
+
+/* Hover effect for service blocks */
+.service:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading inside each service block */
+.service h3 {
+    font-size: 1.5rem;
+    color: #495057;
+    margin-bottom: 20px;
+}
+
+/* Paragraph inside each service block */
+.service p {
+    font-size: 1rem;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+/* Mobile responsiveness for Services Section */
+@media (max-width: 1024px) {
+    #services {
+        padding: 50px 5%;
+    }
+
+    .service {
+        height: 220px; /* Heightni kichraytirish */
+    }
+
+    .service h3 {
+        font-size: 1.3rem;
+    }
+
+    .service p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #services {
+        padding: 40px 5%;
+    }
+
+    .service {
+        padding: 20px;
+        height: 200px; /* Kichik ekranlar uchun heightni yanada kamaytiring */
+    }
+
+    .service h3 {
+        font-size: 1.2rem;
+    }
+
+    .service p {
+        font-size: 0.9rem;
+    }
+}

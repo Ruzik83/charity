@@ -1,0 +1,128 @@
+/* ========== So‘rovlar bo‘limi ========== */
+#requests-section {
+    padding: clamp(30px, 5vw, 50px) 5%;
+    background-color: #f7f9fc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#requests-section h2 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: clamp(20px, 4vw, 40px);
+    font-weight: bold;
+}
+
+.requests-grid {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 30px);
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media (min-width: 769px) {
+    .requests-grid {
+        max-width: 1000px;
+        padding: 0 20px;
+    }
+}
+
+.request-card {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    padding: clamp(15px, 3vw, 25px);
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.request-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.request-card h3 {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    color: #1a202c;
+    margin-bottom: 10px;
+}
+
+.request-card p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.request-card img,
+.request-card video,
+.request-card iframe {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.request-card .btn {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #1abc9c;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.request-card .btn:hover {
+    background-color: #16a085;
+}
+
+/* Mobil uchun */
+@media (max-width: 768px) {
+    #requests-section {
+        padding: 30px 3%;
+    }
+
+    .requests-grid {
+        gap: 20px;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    .request-card {
+        padding: 15px;
+    }
+
+    .request-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .request-card p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #requests-section {
+        padding: 20px 2%;
+    }
+
+    .request-card {
+        padding: 10px;
+    }
+
+    .request-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .request-card p {
+        font-size: 0.85rem;
+    }
+}

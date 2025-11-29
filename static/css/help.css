@@ -1,0 +1,83 @@
+/* ========== Request Cards Section ========== */
+#requests-section {
+    padding: 50px 10%;
+    background-color: #f7f9fc;
+}
+
+#requests-section h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+/* Request card style */
+.request-card {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    padding: 25px 20px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Hover effect */
+.request-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Request card title */
+.request-card h3 {
+    font-size: 1.5rem;
+    color: #1a202c;
+    margin-bottom: 10px;
+}
+
+/* Request card content */
+.request-card p {
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+/* Optional button inside request card */
+.request-card .btn {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #1abc9c;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.request-card .btn:hover {
+    background-color: #16a085;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    #requests-section {
+        padding: 40px 5%;
+    }
+
+    .request-card {
+        padding: 20px;
+    }
+
+    .request-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .request-card p {
+        font-size: 0.95rem;
+    }
+}
